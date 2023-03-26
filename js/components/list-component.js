@@ -1,4 +1,6 @@
 import { StatusLabel } from '../constants.js';
+import { createElement, renderElement } from '../utils.js';
+import TaskComponent from './task-component.js';
 
 export default class ListComponent {
     constructor(taskService, status) {
@@ -33,6 +35,12 @@ export default class ListComponent {
 
     _renderTasks() {
         this._removeTasks();
+        this._tasks.forEach((task) => {
+            const taskItemComponent = new TaskComponent(this._taskService, task);
+            const taskItemElement = taskItemComponent.getElement();
+
+            renderElement(this.getElement().lastChild.previousElementSibling, taskItemElement, InsertPosition.BEFOREEND);
+        });
 
     }
 
