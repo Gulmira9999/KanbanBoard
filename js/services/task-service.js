@@ -17,4 +17,9 @@ export default class TasksService {
     _emitEvent(type, detail) {
         window.dispatchEvent(new CustomEvent(type, { detail }));
     }
+
+    getByStatus(status) {
+        return this._tasks.filter((task) => task.status === status);
+    }
+
 }

@@ -28,4 +28,10 @@ export const Text = {
     NEW_TASK: `New task`,
 };
 
+export const StatusLabel = {
+    [Status.BACKLOG]: `Beklog`,
+    [Status.PROCESSING]: `I process`,
+    [Status.DONE]: `Done`,
+    [Status.BASKET]: `Bascet`,
+};
 export const MIN_TITLE_LENGTH = 2;
