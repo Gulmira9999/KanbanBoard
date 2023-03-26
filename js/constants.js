@@ -22,9 +22,10 @@ export const StateActions = {
     ELEMENT_EDITED: `elementEdited`,
 };
 
-
-export function generateId() {
-    return Math.random().toString(36).substr(2, 9);
-}
+export const Text = {
+    EMPTY_TASK: `Drag card`,
+    EMPTY_BASKET: `Bascet is empty`,
+    NEW_TASK: `New task`,
+};
 
 export const MIN_TITLE_LENGTH = 2;

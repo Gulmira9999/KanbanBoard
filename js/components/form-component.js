@@ -1,14 +1,15 @@
 import { MIN_TITLE_LENGTH } from '../constants.js';
+import { createElement } from '../utils.js';
 
 export default class FormComponent {
-    constructor(taskService, label) {
-        this._taskService = taskService;
-        this._label = label;
-    }
+  constructor(taskService, label) {
+    this._taskService = taskService;
+    this._label = label;
+  }
 
-    _getTemplate() {
-        return (
-            `<form aria-label="Форма добавления задачи" class="add-task__form">
+  _getTemplate() {
+    return (
+      `<form aria-label="Форма добавления задачи" class="add-task__form">
         <div class="add-task__input-wrapper">
           <label for="add-task">${this._label}</label>
           <input id="add-task" name="task-name" placeholder="Название задачи..." type="text" required minlength="${MIN_TITLE_LENGTH}">
@@ -18,28 +19,38 @@ export default class FormComponent {
             <rect fill="white" height="14.6667" width="1.83333" x="10.0833" y="3.66663"/>
             <rect fill="white" height="14.6667" transform="rotate(90 18.3333 10.0833)" width="1.83333" x="18.3333" y="10.0833"/>
           </svg>
-          <span>Добавить</span>
+          <span>Add</span>
         </button>
       </form>`
-        );
+    );
+  }
+
+
+  getElement() {
+    if (!this._element) {
+      this._element = createElement(this._getTemplate());
+      this._afterCreateElement()
     }
 
-    _afterCreateElement() {
-        this._addEventListeners();
-    }
+    return this._element;
+  }
 
-    _addEventListeners() {
-        this.getElement().addEventListener(`submit`, this.formSubmitHandler.bind(this));
-    }
+  _afterCreateElement() {
+    this._addEventListeners();
+  }
 
-    formSubmitHandler(evt) {
-        evt.preventDefault();
+  _addEventListeners() {
+    this.getElement().addEventListener(`submit`, this.formSubmitHandler.bind(this));
+  }
 
-        const inputElement = this.getElement().querySelector(`#add-task`);
-        const title = inputElement.value.trim();
+  formSubmitHandler(evt) {
+    evt.preventDefault();
 
-        this._taskService.create({ title });
-        inputElement.value = ``;
-    }
+    const inputElement = this.getElement().querySelector(`#add-task`);
+    const title = inputElement.value.trim();
+
+    this._taskService.create({ title });
+    inputElement.value = ``;
+  }
 }
 

@@ -1,4 +1,4 @@
-import { createElement } from "../util.js";
+import { createElement } from "../utils.js";
 export default class HeaderComponent {
     constructor(name) {
         this._name = name;

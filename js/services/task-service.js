@@ -14,5 +14,7 @@ export default class TasksService {
         this._emitEvent(StateActions.TASK_CREATE, task);
     }
 
-
+    _emitEvent(type, detail) {
+        window.dispatchEvent(new CustomEvent(type, { detail }));
+    }
 }
