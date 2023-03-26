@@ -1,4 +1,5 @@
 import AddTaskComponent from "./components/add-task-component.js";
+import BoardComponent from "./components/board-component.js";
 import HeaderComponent from "./components/header-component.js";
 import { InsertPosition } from "./constants.js";
 import { tasks } from "./data.js";
@@ -20,3 +21,8 @@ const addTaskComponent = new AddTaskComponent(taskService);
 const addTaskElement = addTaskComponent.getElement();
 
 renderElement(boardAppInnerElement, addTaskElement, InsertPosition.AFTERBEGIN);
+
+const boardComponent = new BoardComponent(taskService);
+const boardElement = boardComponent.getElement();
+renderElement(boardAppInnerElement, boardElement, InsertPosition.BEFOREEND);
+

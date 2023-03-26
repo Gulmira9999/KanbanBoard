@@ -1,4 +1,4 @@
-import { StatusLabel } from '../constants.js';
+import { InsertPosition, StatusLabel } from '../constants.js';
 import { createElement, renderElement } from '../utils.js';
 import TaskComponent from './task-component.js';
 
