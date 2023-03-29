@@ -1,4 +1,4 @@
-import { InsertPosition } from "./constants.js";
+import { HIDE_BLOCK_CLASS, InsertPosition } from "./constants.js";
 
 export function createElement(template) {
     const element = document.createElement(`div`);
@@ -23,4 +23,8 @@ export function renderElement(container, element, insertPosition = InsertPositio
 
 export function generateId() {
     return Math.random().toString(36).substr(2, 9);
+}
+
+export function setElementVisibility(element, visibility) {
+    element.classList.toggle(HIDE_BLOCK_CLASS, !visibility)
 }

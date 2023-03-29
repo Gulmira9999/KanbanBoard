@@ -1,6 +1,7 @@
-import { InsertPosition, StateActions, Status, StatusLabel } from '../constants.js';
-import { createElement, renderElement } from '../utils.js';
+import { InsertPosition, StateActions, STATE_EMPTY, Status, StatusLabel, Text } from '../constants.js';
+import { createElement, renderElement, setElementVisibility } from '../utils.js';
 import BasketCleanerComponent from './basket-cleaner-component.js';
+import EmptyItemComponent from './empty-item-component.js';
 import TaskComponent from './task-component.js';
 
 export default class ListComponent {
@@ -43,11 +44,14 @@ export default class ListComponent {
 
     _renderTasks() {
         this._removeTasks();
+
         this._tasks.forEach((task) => {
             const taskItemComponent = new TaskComponent(this._taskService, task);
             const taskItemElement = taskItemComponent.getElement();
             renderElement(this.getElement().lastChild.previousElementSibling, taskItemElement, InsertPosition.BEFOREEND);
         });
+
+        this._renderEmptyComponent((this._status === Status.BASKET) ? Text.EMPTY_BASKET : Text.EMPTY_TASK)
 
     }
 
@@ -58,6 +62,14 @@ export default class ListComponent {
     }
     _removeTasks() {
         this.getElement().querySelector(`.taskboard__list`).innerHTML = ``;
+    }
+
+    _renderEmptyComponent(title) {
+        const emptyItemComponent = new EmptyItemComponent(title, this._status, STATE_EMPTY);
+        const emptyItemElement = emptyItemComponent.getElement();
+
+        setElementVisibility(emptyItemElement, this._tasks.length === 0);
+        renderElement(this.getElement().querySelector(`.taskboard__list`), emptyItemElement, InsertPosition.BEFOREEND);
     }
 
     _changeDataHandler() {

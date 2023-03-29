@@ -34,4 +34,9 @@ export const StatusLabel = {
     [Status.DONE]: `Done`,
     [Status.BASKET]: `Bascet`,
 };
+
 export const MIN_TITLE_LENGTH = 2;
+export const STATE_EMPTY = `empty`;
+export const HIDE_BLOCK_CLASS = `hidden-block`;
+
+
