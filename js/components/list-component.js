@@ -1,4 +1,4 @@
-import { InsertPosition, StatusLabel } from '../constants.js';
+import { InsertPosition, StateActions, StatusLabel } from '../constants.js';
 import { createElement, renderElement } from '../utils.js';
 import TaskComponent from './task-component.js';
 
@@ -29,11 +29,12 @@ export default class ListComponent {
     }
 
     _afterCreateElement() {
-
+        this._addEventListeners();
         this._renderTasks();
     }
 
     _renderTasks() {
+        console.log('render');
         this._removeTasks();
         this._tasks.forEach((task) => {
             const taskItemComponent = new TaskComponent(this._taskService, task);
@@ -44,7 +45,9 @@ export default class ListComponent {
 
     }
 
-
+    _addEventListeners() {
+        window.addEventListener(StateActions.TASK_CREATE, this._changeDataHandler.bind(this));
+    }
     _removeTasks() {
         this.getElement().querySelector(`.taskboard__list`).innerHTML = ``;
     }
