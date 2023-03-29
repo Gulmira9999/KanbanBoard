@@ -1,6 +1,8 @@
-import { createElement } from "../utils.js";
-export default class HeaderComponent {
+import AbstractComponent from './abstract-component.js';
+
+export default class HeaderComponent extends AbstractComponent {
     constructor(name) {
+        super();
         this._name = name;
     }
 
@@ -14,11 +16,4 @@ export default class HeaderComponent {
         );
     }
 
-    getElement() {
-        if (!this._element) {
-            this._element = createElement(this._getTemplate());
-        }
-
-        return this._element;
-    }
 }

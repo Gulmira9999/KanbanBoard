@@ -1,11 +1,13 @@
 import { InsertPosition, StateActions, STATE_EMPTY, Status, StatusLabel, Text } from '../constants.js';
-import { createElement, renderElement, setElementVisibility } from '../utils.js';
+import { renderElement, setElementVisibility } from '../utils.js';
+import AbstractComponent from './abstract-component.js';
 import BasketCleanerComponent from './basket-cleaner-component.js';
 import EmptyItemComponent from './empty-item-component.js';
 import TaskComponent from './task-component.js';
 
-export default class ListComponent {
+export default class ListComponent extends AbstractComponent {
     constructor(taskService, status) {
+        super();
         this._taskService = taskService;
         this._status = status;
         this._title = StatusLabel[status];
@@ -19,15 +21,6 @@ export default class ListComponent {
             <div class="taskboard__list" id="${this._status}"></div>
            </article>`
         );
-    }
-
-    getElement() {
-        if (!this._element) {
-            this._element = createElement(this._getTemplate());
-            this._afterCreateElement();
-        }
-
-        return this._element;
     }
 
     _afterCreateElement() {

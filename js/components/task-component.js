@@ -1,6 +1,8 @@
-import { createElement } from "../utils.js";
-export default class TaskComponent {
+import AbstractComponent from './abstract-component.js';
+
+export default class TaskComponent extends AbstractComponent {
     constructor(taskService, task) {
+        super();
         this._taskService = taskService;
         this._task = task;
     }
@@ -17,14 +19,7 @@ export default class TaskComponent {
         )
     }
 
-    getElement() {
-        if (!this._element) {
-            this._element = createElement(this._getTemplate());
-            this._afterCreateElement();
-        }
 
-        return this._element;
-    }
     _afterCreateElement() {
 
     }

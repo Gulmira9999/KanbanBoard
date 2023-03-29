@@ -1,6 +1,8 @@
-import { createElement } from "../utils.js";
-export default class EmptyItemComponent {
+import AbstractComponent from './abstract-component.js';
+
+export default class EmptyItemComponent extends AbstractComponent {
     constructor(title, taskStatus, status) {
+        super();
         this._title = title;
         this._taskStatus = taskStatus;
         this._status = status;
@@ -14,11 +16,4 @@ export default class EmptyItemComponent {
         );
     }
 
-    getElement() {
-        if (!this._element) {
-            this._element = createElement(this._getTemplate());
-        }
-
-        return this._element;
-    }
 }

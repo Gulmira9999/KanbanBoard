@@ -1,8 +1,10 @@
 import { MIN_TITLE_LENGTH } from '../constants.js';
-import { createElement } from '../utils.js';
+import AbstractComponent from './abstract-component.js';
 
-export default class FormComponent {
+
+export default class FormComponent extends AbstractComponent {
   constructor(taskService, label) {
+    super();
     this._taskService = taskService;
     this._label = label;
   }
@@ -23,16 +25,6 @@ export default class FormComponent {
         </button>
       </form>`
     );
-  }
-
-
-  getElement() {
-    if (!this._element) {
-      this._element = createElement(this._getTemplate());
-      this._afterCreateElement()
-    }
-
-    return this._element;
   }
 
   _afterCreateElement() {

@@ -1,9 +1,11 @@
 import { InsertPosition, Text } from '../constants.js';
-import { createElement, renderElement } from '../utils.js';
+import { renderElement } from '../utils.js';
+import AbstractComponent from './abstract-component.js';
 import FormComponent from './form-component.js';
 
-export default class AddTaskComponent {
+export default class AddTaskComponent extends AbstractComponent {
     constructor(taskService) {
+        super();
         this._taskService = taskService;
     }
 
@@ -13,15 +15,6 @@ export default class AddTaskComponent {
               <h2 class="visually-hidden">${Text.NEW_TASK}</h2>
              </section>`
         );
-    }
-
-    getElement() {
-        if (!this._element) {
-            this._element = createElement(this._getTemplate());
-            this._afterCreateElement()
-        }
-
-        return this._element;
     }
 
     _afterCreateElement() {
