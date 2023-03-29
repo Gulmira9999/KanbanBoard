@@ -22,4 +22,10 @@ export default class TasksService {
         return this._tasks.filter((task) => task.status === status);
     }
 
+    cleanupBasket() {
+        console.log('clean2');
+        this._tasks = this._tasks.filter((task) => task.status !== Status.BASKET);
+        this._emitEvent(StateActions.BASKET_CLEANUP);
+    }
+
 }
