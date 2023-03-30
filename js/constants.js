@@ -39,4 +39,9 @@ export const MIN_TITLE_LENGTH = 2;
 export const STATE_EMPTY = `empty`;
 export const HIDE_BLOCK_CLASS = `hidden-block`;
 
+export const Key = {
+    ENTER: 13,
+    ESCAPE: 27,
+};
+
 

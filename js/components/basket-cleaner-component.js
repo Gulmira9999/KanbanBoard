@@ -26,8 +26,6 @@ export default class BasketCleanerComponent extends AbstractComponent {
   }
 
   _cleanBasketHandler() {
-    console.log('clean');
-
     this._taskService.cleanupBasket();
   }
 

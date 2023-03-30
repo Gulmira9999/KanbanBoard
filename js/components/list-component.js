@@ -51,8 +51,10 @@ export default class ListComponent extends AbstractComponent {
     _addEventListeners() {
         window.addEventListener(StateActions.TASK_CREATE, this._changeDataHandler.bind(this));
         window.addEventListener(StateActions.BASKET_CLEANUP, this._changeDataHandler.bind(this));
+        window.addEventListener(StateActions.TASK_UPDATE_TITLE, this._changeDataHandler.bind(this));
 
     }
+
     _removeTasks() {
         this.getElement().querySelector(`.taskboard__list`).innerHTML = ``;
     }
