@@ -22,6 +22,8 @@ export default class TaskComponent extends AbstractComponent {
 
     _afterCreateElement() {
         this._makeTaskEditable();
+        this._makeTaskDraggable();
+
 
         // window.addEventListener(StateActions.ELEMENT_EDITED, (evt) => {
         //     const isDisplayBlock = (evt.detail.id === undefined) || (evt.detail.id === this._task.id);
@@ -73,5 +75,32 @@ export default class TaskComponent extends AbstractComponent {
             this._task.title = newTitle;
             this._taskService.updateTitle(this._task);
         }
+    }
+
+
+    _makeTaskDraggable() {
+        this._taskService.setDraggedElement(null);
+        this.getElement().setAttribute(`draggable`, true);
+        this.getElement().addEventListener(`dragstart`, this._dragstartHandler.bind(this));
+        this.getElement().addEventListener(`dragend`, this._dragendHandler.bind(this));
+    }
+
+    _dragstartHandler() {
+        const draggedElement = this.getElement();
+        draggedElement.classList.add(`task--dragged`);
+        this._taskService.setDraggedElement(draggedElement);
+    }
+
+
+    _dragendHandler() {
+        const prevTaskId = this.getElement().previousElementSibling ? this.getElement().previousElementSibling.dataset.id : undefined;
+        const draggedElement = this._taskService.getDraggedElement();
+
+        draggedElement.classList.remove(`task--dragged`);
+        if (draggedElement.dataset.status) {
+            this._task.status = draggedElement.dataset.status;
+            this._taskService.updatePosition(this._task, prevTaskId);
+        }
+        this._taskService.setDraggedElement(null);
     }
 }

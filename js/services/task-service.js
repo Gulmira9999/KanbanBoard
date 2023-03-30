@@ -44,4 +44,25 @@ export default class TasksService {
         return this._tasks.findIndex((el) => el.id === id);
     }
 
+    setDraggedElement(taskElement) {
+        this._draggedElement = taskElement;
+    }
+
+    updatePosition(task, prevTaskId) {
+        const taskIndex = this._getTaskIndexByID(task.id);
+
+        this._tasks.splice(taskIndex, 1);
+        if (prevTaskId !== undefined) {
+            const prevTaskIndex = this._tasks.findIndex((el) => el.id === prevTaskId);
+            this._tasks.splice(prevTaskIndex + 1, 0, task);
+        } else {
+            this._tasks.unshift(task);
+        }
+        this._emitEvent(StateActions.TASK_UPDATE_POSITION, task);
+    }
+
+    getDraggedElement() {
+        return this._draggedElement;
+    }
+
 }
